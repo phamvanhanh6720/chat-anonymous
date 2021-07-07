@@ -36,3 +36,23 @@ def create_msg(data):
         final_msg = data
         final_msg = f'{len(final_msg):<10}' + final_msg
         return final_msg.encode("utf-8")
+
+
+def stream_data(target):
+    data = target.recv(BUFFERSIZE)
+    if len(data) != 0:
+        msglen = int(data[:BUFFERSIZE].strip())
+        full_data = b''
+
+        # stream the data in with a set buffer size
+        while len(full_data) < msglen:
+            full_data += target.recv(BUFFERSIZE)
+
+        if "iv_exc" not in full_data.decode("utf-8") and "key_exc" not in full_data.decode("utf-8"):
+            full_data = base64.b64decode(full_data)
+
+            # returning just the bytes, json operations done later in the code to avoid importing errors
+            return full_data
+        return full_data
+    else:
+        pass
