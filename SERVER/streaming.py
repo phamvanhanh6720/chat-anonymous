@@ -56,3 +56,14 @@ def stream_data(target):
         return full_data
     else:
         pass
+
+
+def decrypt_msg(msg, key):
+    if key is not None:
+        initialize_AES(str(key).encode("utf-8"))
+        # everytime we generate a object, it can't be reused
+        cipher = enc.generate_cipher()
+        decrypted_data = cipher.decrypt(msg)
+        return decrypted_data
+    else:
+        return msg
