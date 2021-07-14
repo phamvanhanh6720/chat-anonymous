@@ -1,0 +1,4 @@
+pyDHE==1.0.0
+Eel==0.14.0
+dataclasses==0.8
+crypto==1.4.1
