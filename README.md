@@ -3,14 +3,16 @@
 
 # About
 Ứng dụng được xây dựng bằng cách sử dụng thư viện socket có trong Python. Các client kết nối với server và sau đó server sẽ cho phép họ gửi tin nhắn văn bản cho nhau.  
-Những tin nhắn này được mã hóa bằng **AES-256** để đảm bảo tính riêng tư và ẩn danh cho người dùng. Ngoài ra chúng tôi cũng không thu thập bất kỳ dữ liệu nào của người dùng.  
+Những tin nhắn này được mã hóa bằng **AES-256** CFB Mode để đảm bảo tính riêng tư và ẩn danh cho người dùng. Ngoài ra chúng tôi cũng không thu thập bất kỳ dữ liệu nào của người dùng.  
 Về trao đổi khóa được thực hiện bằng phương pháp **DiffieHellman** và GUI được xây dựng bằng thư viện Eel.
 
 
 # Mô hình
 
-Mỗi client sẽ có private key của mình và chỉ được chia sẻ khóa này cho server. Server sẽ mã hóa và giải mã thông điệp bằng khóa tương ứng cho các client khác trong cuộc trò chuyện.
-
+Mỗi client sẽ có private key của mình và chỉ được chia sẻ khóa này cho server. Server sẽ mã hóa và giải mã thông điệp bằng khóa tương ứng cho các client khác trong cuộc trò chuyện
+<p align="center">
+  <img src="./imgs/diagram_chat.png">
+</p>
 
 # Ẩn danh
 
@@ -34,3 +36,5 @@ python3 SERVER/server.py -p <port number>
 # you can run multi clients to chat each other
 python3 CLIENT/client.py -s <server_ip> -p <server_port>
 ```
+# Định hướng phát triển
+Nhược điểm của mô hình này là server có thể nhìn thấy bản rõ của thông điệp. Vì vậy, trong tương lai nhóm sẽ phát triển thành hệ thống end-to-end encryption, tích hợp HMAC, digital signature để đảm bảo tính bảo mật, toàn vẹn của thông tin.
